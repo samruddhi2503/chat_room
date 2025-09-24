@@ -1,0 +1,363 @@
+/* Full page background */
+.app-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+}
+
+.login-title {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.input-container input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+.input-container label {
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  color: #aaa;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  background: white;
+  padding: 0 5px;
+  font-size: 12px;
+  color: #6c63ff;
+}
+
+.join-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6c63ff, #74ebd5);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.join-btn:hover {
+  background: linear-gradient(135deg, #74ebd5, #6c63ff);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.chat-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 26px;
+}
+
+.messages-box {
+  border-radius: 12px;
+  padding: 15px;
+  flex-grow: 1;
+  overflow-y: auto;
+  background: #e5ddd5;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 70%;
+  word-wrap: break-word;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.message:hover {
+  transform: scale(1.02);
+}
+
+.message.own {
+  align-self: flex-end;
+}
+
+.input-send {
+  display: flex;
+  gap: 10px;
+}
+
+.input-send input {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.input-send input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
+}
+
+.send-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #6c63ff, #74ebd5);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.send-btn:hover {
+  background: linear-gradient(135deg, #74ebd5, #6c63ff);
+  transform: translateY(-2px);
+}
+.messages-box {
+  height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column; /* older messages on top, new at bottom */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #e5ddd5; /* WhatsApp-like background */
+}
+
+.message {
+  position: relative;
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
+.message.own {
+  margin-left: auto;
+}
+
+.message-content {
+  display: block;
+}
+
+.message-time {
+  font-size: 0.7rem;
+  color: gray;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* Dashboard (hamburger menu) */
+.dashboard {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.hamburger {
+  width: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 20px;
+}
+
+.hamburger span {
+  display: block;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
+
+/* Dropdown menu */
+.menu {
+  margin-top: 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.menu button {
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.menu button:hover {
+  background: #ddd;
+}
+.dashboard-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.dash-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #6c63ff, #74ebd5);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.dash-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #74ebd5, #6c63ff);
+}
+
+.dash-btn.active {
+  background: linear-gradient(135deg, #ff8c42, #ff5e62);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+.active-users {
+  background: rgba(255,255,255,0.95);
+  padding: 15px 20px;
+  border-radius: 12px;
+  max-width: 300px;
+  margin: 0 auto 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.active-users h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.active-users ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.active-users li {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #6c63ff, #74ebd5);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.active-users-list {
+  margin-top: 10px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px 0;
+  color: #fff;
+  background: linear-gradient(90deg, #4fbae8, #64b3de, #5bd7ec, #28bfca);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s ease infinite;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
