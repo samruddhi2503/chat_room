@@ -1,4 +1,4 @@
-// src/App.js
+
 import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 import Bubbles from "./Bubbles";
@@ -46,7 +46,7 @@ function App() {
     return userColors.current[user];
   };
 
-  // Wallpaper options
+ 
   const solidColors = ["#ced1a5c1", "#9abcd0ff", "#8481bed3", "#c3f1ccb8"];
   const vintageWallpapers = [vintage1, vintage2, vintage3];
   const sceneryWallpapers = [scenery1, scenery2, scenery3];

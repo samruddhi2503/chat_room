@@ -14,23 +14,21 @@ async def websocket_endpoint(websocket: WebSocket, username: str):
     active_users.add(username)
     print(f"✅ {username} connected. Active users: {list(active_users)}")
 
-    # Send last 20 messages to new user
     last_messages = get_last_messages("general")
     await websocket.send_json({"type": "history", "messages": last_messages})
     print(f"📚 Sent last {len(last_messages)} messages to {username}")
 
     try:
         while True:
-            # Receive message from this user
+         
             data = await websocket.receive_json()
-            print(f"📨 Received from {username}: {data}")  # Debug log
+            print(f"📨 Received from {username}: {data}") 
 
-            # Save message to database
             msg = Message(username=username, content=data["content"], room="general")
             save_message(msg)
             print(f"💾 Saved message: {msg.content}")
 
-            # Broadcast to all connected clients
+         
             disconnected = []
             for connection in connections:
                 try:
@@ -44,7 +42,6 @@ async def websocket_endpoint(websocket: WebSocket, username: str):
                     print(f"❌ Error sending to client: {e}")
                     disconnected.append(connection)
 
-            # Remove broken connections
             for conn in disconnected:
                 if conn in connections:
                     connections.remove(conn)

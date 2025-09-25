@@ -10,10 +10,9 @@
   background-size: 1000% 1000%;
   animation: gradientBG 6s ease infinite;
 }
-/* Keyframes for fade in */
 @keyframes fadeInOutline {
   from { opacity: 0; }
-  to { opacity: 2; } /* final opacity, adjust as needed */
+  to { opacity: 2; } 
 }
 .outline-img {
   position: fixed;
@@ -23,19 +22,17 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
-  opacity: 10.2; /* subtle so it doesn't hide gradient */
-  mix-blend-mode: lighten; /* blends with gradient nicely */
-  z-index: 0; /* behind content */
+  opacity: 10.2;
+  mix-blend-mode: lighten; 
+  z-index: 0; 
   
 }
 
 .login-container,
 .chat-container {
   position: relative;
-  z-index: 1; /* above outline and gradient */
+  z-index: 1; 
 }
-
-
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -53,7 +50,7 @@
 .login-container {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.85); /* semi-transparent so background shows */
+  background: rgba(255, 255, 255, 0.85); 
   padding: 30px 40px;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -146,14 +143,14 @@
 }
 .chat-header {
   display: flex;
-  justify-content: space-between; /* title on left, menu on right */
+  justify-content: space-between; 
   align-items: center;
   margin-bottom: 12px;
   padding: 8px 12px;
 }
 
 .chat-title {
-  font-family: 'Poppins', Cambria; /* clean professional font */
+  font-family: 'Poppins', Cambria; 
   font-size: 2rem;
   font-weight: 700;
   background: linear-gradient(90deg,  #65c7f7);
@@ -167,7 +164,7 @@
 }
 
 .chat-title:hover {
-  transform: scale(1.05); /* slight hover effect */
+  transform: scale(1.05); 
 }
 
 
@@ -239,11 +236,11 @@
   height: 400px;
   overflow-y: auto;
   display: flex;
-  flex-direction: column; /* older messages on top, new at bottom */
+  flex-direction: column; 
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background: #e5ddd5; /* WhatsApp-like background */
+  background: #e5ddd5;
 }
 
 .message {
@@ -271,7 +268,7 @@
   margin-top: 5px;
 }
 
-/* Dashboard (hamburger menu) */
+
 .dashboard {
   position: absolute;
   top: 10px;
@@ -294,7 +291,6 @@
   border-radius: 2px;
 }
 
-/* Dropdown menu */
 .menu {
   margin-top: 10px;
   background: white;
@@ -425,19 +421,18 @@ h1 {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-/* Floating bubbles */
+
 .bubble {
   position: absolute;
-  left: -50px; /* start slightly off-screen */
-  background: rgba(245, 233, 228, 0.63); /* transparent white */
+  left: -50px; 
+  background: rgba(245, 233, 228, 0.63); 
   border-radius: 50%;
-  pointer-events: none; /* so it doesn't block clicks */
+  pointer-events: none; 
   animation-name: floatRight;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
-/* Move bubbles left-to-right across the screen */
 @keyframes floatRight {
   0% {
     transform: translateX(0) scale(1);
@@ -501,10 +496,10 @@ h1 {
 .dashboard-menu button:hover {
   background: rgba(108, 99, 255, 0.1);
 }
-/* === ACTIVE USERS DROPDOWN === */
+
 .active-users-dropdown {
   position: absolute;
-  top: 40px;        /* just below ☰ button */
+  top: 40px;     
   right: 0;
   background: white;
   color: #333;
@@ -539,7 +534,7 @@ h1 {
 .active-users-dropdown li:hover {
   background: #f0f0f0;
 }
-/* Dashboard toggle button */
+
 .dashboard-toggle {
   background-color: #ffffffcc;
   border: none;
@@ -556,7 +551,6 @@ h1 {
   transform: scale(1.05);
 }
 
-/* Dashboard menu container */
 .dashboard-menu {
   position: absolute;
   top: 40px;
@@ -571,7 +565,6 @@ h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Dashboard buttons inside menu */
 .dashboard-menu button {
   display: block;
   width: 100%;
