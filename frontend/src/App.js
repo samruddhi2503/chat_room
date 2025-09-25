@@ -4,7 +4,15 @@ import "./App.css";
 import Bubbles from "./Bubbles";
 import AutumnOutline from "./AutumnOutline.png";
 
-const getQueryParam = (param) => new URLSearchParams(window.location.search).get(param) || "";
+import vintage1 from "./vintage1.jpg";
+import vintage2 from "./vintage2.jpg";
+import vintage3 from "./vintage3.jpg";
+import scenery1 from "./scenery1.jpg";
+import scenery2 from "./scenery2.jpg";
+import scenery3 from "./scenery3.jpg";
+
+const getQueryParam = (param) =>
+  new URLSearchParams(window.location.search).get(param) || "";
 
 function App() {
   const [username, setUsername] = useState(getQueryParam("username"));
@@ -14,12 +22,15 @@ function App() {
   const [input, setInput] = useState("");
   const [activeUsers, setActiveUsers] = useState([]);
   const [showDashboard, setShowDashboard] = useState(false);
-  const [showActiveUsersInDashboard, setShowActiveUsersInDashboard] = useState(false);
+  const [showActiveUsersInDashboard, setShowActiveUsersInDashboard] =
+    useState(false);
+  const [showWallpaperOptions, setShowWallpaperOptions] = useState(false);
+  const [chatWallpaper, setChatWallpaper] = useState("");
 
   const ws = useRef(null);
   const messagesEndRef = useRef(null);
-
   const userColors = useRef({});
+
   const getRandomColor = (user) =>
     `hsl(${Math.floor(Math.abs(hashCode(user)) % 360)}, 70%, 85%)`;
 
@@ -33,6 +44,15 @@ function App() {
   const getUserColor = (user) => {
     if (!userColors.current[user]) userColors.current[user] = getRandomColor(user);
     return userColors.current[user];
+  };
+
+  // Wallpaper options
+  const solidColors = ["#ced1a5c1", "#9abcd0ff", "#8481bed3", "#c3f1ccb8"];
+  const vintageWallpapers = [vintage1, vintage2, vintage3];
+  const sceneryWallpapers = [scenery1, scenery2, scenery3];
+
+  const applyWallpaper = (wall) => {
+    setChatWallpaper(wall);
   };
 
   const joinRoom = (roomName = "general", usernameParam = username, fetchHistory = true) => {
@@ -58,13 +78,20 @@ function App() {
       try { data = JSON.parse(ev.data); } catch (e) { return; }
 
       if (data.type === "history" && fetchHistory) {
-        setMessages(Array.isArray(data.messages) ? data.messages : []);
-      } else if (data.type === "message") {
+        const fixed = (Array.isArray(data.messages) ? data.messages : []).map(m => ({
+          ...m,
+          time: m.time || new Date().toISOString()
+        }));
+        setMessages(fixed.sort((a, b) => new Date(a.time) - new Date(b.time)));
+      } 
+      else if (data.type === "message") {
+        const msg = { ...data, time: data.time || new Date().toISOString() };
         setMessages((prev) => {
-          if (data.id && prev.some((m) => m.id === data.id)) return prev;
-          return [...prev, data];
+          if (msg.id && prev.some((m) => m.id === msg.id)) return prev;
+          return [...prev, msg].sort((a, b) => new Date(a.time) - new Date(b.time));
         });
-      } else if (data.type === "active_users") {
+      } 
+      else if (data.type === "active_users") {
         setActiveUsers(Array.isArray(data.users) ? data.users : []);
       }
     };
@@ -83,7 +110,10 @@ function App() {
   const sendMessage = () => {
     if (!ws.current || ws.current.readyState !== WebSocket.OPEN) return;
     if (!input) return;
-    ws.current.send(JSON.stringify({ username, content: input }));
+
+    const now = new Date().toISOString();
+    ws.current.send(JSON.stringify({ username, content: input, time: now }));
+
     setInput("");
   };
 
@@ -127,46 +157,81 @@ function App() {
         </div>
       ) : (
         <div className="chat-container">
-          {/* Header with dashboard toggle */}
           <div className="chat-header">
             <h2 className="chat-title">Group Chat — {room}</h2>
 
             <div className="dashboard">
-              <button
-                className="dashboard-toggle"
-                onClick={() => setShowDashboard(v => !v)}
-              >
-                ☰
-              </button>
+              <button className="dashboard-toggle" onClick={() => setShowDashboard(v => !v)}>☰</button>
 
               {showDashboard && (
                 <div className="dashboard-menu">
-                  <div>
-                    <button
-                      onClick={() => setShowActiveUsersInDashboard(v => !v)}
-                    >
-                      👥 Active Users
-                    </button>
-                    {showActiveUsersInDashboard && (
-                      <ul style={{ paddingLeft: 15, marginTop: 5 }}>
-                        {activeUsers.length ? activeUsers.map(u => <li key={u}>{u}</li>) : <li>No active users</li>}
-                      </ul>
-                    )}
-                  </div>
+                  <button onClick={() => setShowActiveUsersInDashboard(v => !v)}>👥 Active Users</button>
+                  {showActiveUsersInDashboard && (
+                    <ul className="active-users-list">
+                      {activeUsers.length ? activeUsers.map(u => <li key={u}>{u}</li>) : <li>No active users</li>}
+                    </ul>
+                  )}
+
                   <button onClick={createNewRoom}>🆕 New Chat Room</button>
-                  <button onClick={() => alert("Wallpaper change coming soon!")}>🎨 Change Wallpaper</button>
+                  <button onClick={() => setShowWallpaperOptions(v => !v)}>🎨 Change Wallpaper</button>
+
+                  {showWallpaperOptions && (
+                    <div className="wallpaper-options">
+                      <div>
+                        <h4>Solid Colors</h4>
+                        <div className="wallpaper-list">
+                          {solidColors.map(color => (
+                            <div
+                              key={color}
+                              className="wallpaper-item"
+                              style={{ backgroundColor: color }}
+                              onClick={() => applyWallpaper(color)}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Vintage</h4>
+                        <div className="wallpaper-list">
+                          {vintageWallpapers.map(img => (
+                            <img key={img} src={img} className="wallpaper-item" onClick={() => applyWallpaper(img)} alt="vintage" />
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Scenery</h4>
+                        <div className="wallpaper-list">
+                          {sceneryWallpapers.map(img => (
+                            <img key={img} src={img} className="wallpaper-item" onClick={() => applyWallpaper(img)} alt="scenery" />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           </div>
 
-          <div className="messages-box">
-            {messages.map((msg, idx) => {
+          <div className="messages-box" style={{
+            background: chatWallpaper
+              ? chatWallpaper.startsWith("#")
+                ? chatWallpaper
+                : `url(${chatWallpaper}) center/cover no-repeat`
+              : "#f0f2f5"
+          }}>
+            {messages
+              .sort((a, b) => new Date(a.time) - new Date(b.time))
+              .map((msg, idx) => {
               const isOwn = msg.username === username;
               const bgColor = isOwn ? "#dcf8c6" : getUserColor(msg.username || "anon");
               return (
-                <div key={msg.id || idx} className={`message ${isOwn ? "own" : ""}`} style={{ backgroundColor: bgColor }}>
-                  {!isOwn && <b>{msg.username}: </b>}
+                <div
+                  key={msg.id || idx}
+                  className={`message ${isOwn ? "own" : ""}`}
+                  style={{ backgroundColor: bgColor }}
+                >
+                  {!isOwn && <div className="message-user">{msg.username}</div>}
                   <div className="message-content">{msg.content}</div>
                   <div className="message-time">{formatTime(msg.time)}</div>
                 </div>

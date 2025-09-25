@@ -519,7 +519,7 @@ h1 {
 .active-users-dropdown strong {
   display: block;
   margin-bottom: 6px;
-  color: #6c63ff;
+  color: #bbd5f4;
 }
 
 .active-users-dropdown ul {
@@ -538,4 +538,120 @@ h1 {
 
 .active-users-dropdown li:hover {
   background: #f0f0f0;
+}
+/* Dashboard toggle button */
+.dashboard-toggle {
+  background-color: #ffffffcc;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-toggle:hover {
+  background-color: #e0e0e0cc;
+  transform: scale(1.05);
+}
+
+/* Dashboard menu container */
+.dashboard-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 0;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  min-width: 180px;
+  z-index: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Dashboard buttons inside menu */
+.dashboard-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font: verdana;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.dashboard-menu button:hover {
+  background-color: #83bbe9ea;
+  color: #232222;
+  transform: translateX(4px);
+}
+
+/* Nested active users list */
+.dashboard-menu ul {
+  margin-top: 5px;
+  padding-left: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.dashboard-menu ul li {
+  padding: 4px 0;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.dashboard-menu ul li:hover {
+  color: #007bff;
+  font-weight: 500;
+}
+.wallpaper-options {
+  margin-top: 8px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  max-height: 300px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.wallpaper-options h4 {
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.wallpaper-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.wallpaper-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease;
+}
+
+.wallpaper-item:hover {
+  transform: scale(1.1);
+  border-color: #007bff;
+}
+
+.wallpaper-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
 }
