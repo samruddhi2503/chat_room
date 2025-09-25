@@ -144,13 +144,32 @@
   display: flex;
   flex-direction: column;
 }
+.chat-header {
+  display: flex;
+  justify-content: space-between; /* title on left, menu on right */
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+}
 
 .chat-title {
+  font-family: 'Poppins', Cambria; /* clean professional font */
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg,  #65c7f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 26px;
+  margin: 0;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  letter-spacing: 1px;
+  transition: transform 0.3s ease;
 }
+
+.chat-title:hover {
+  transform: scale(1.05); /* slight hover effect */
+}
+
 
 .messages-box {
   border-radius: 12px;
@@ -431,4 +450,92 @@ h1 {
     transform: translateX(110vw) scale(1.2);
     opacity: 0;
   }
+}
+.dashboard {
+  position: relative;
+}
+
+.dashboard-toggle {
+  background: linear-gradient(135deg, #6c63ff, #74ebd5);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.dashboard-toggle:hover {
+  background: linear-gradient(135deg, #74ebd5, #6c63ff);
+  transform: scale(1.05);
+}
+
+.dashboard-menu {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  z-index: 10;
+  padding: 10px;
+}
+
+.dashboard-menu button {
+  padding: 25px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.dashboard-menu button:hover {
+  background: rgba(108, 99, 255, 0.1);
+}
+/* === ACTIVE USERS DROPDOWN === */
+.active-users-dropdown {
+  position: absolute;
+  top: 40px;        /* just below ☰ button */
+  right: 0;
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 180px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+.active-users-dropdown strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #6c63ff;
+}
+
+.active-users-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.active-users-dropdown li {
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.active-users-dropdown li:hover {
+  background: #f0f0f0;
 }

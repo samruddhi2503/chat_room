@@ -4,23 +4,21 @@ import "./App.css";
 import Bubbles from "./Bubbles";
 import AutumnOutline from "./AutumnOutline.png";
 
-// Helper to read URL params
 const getQueryParam = (param) => new URLSearchParams(window.location.search).get(param) || "";
 
 function App() {
-  // Read username and room from URL params
   const [username, setUsername] = useState(getQueryParam("username"));
   const [room, setRoom] = useState(getQueryParam("room") || "general");
   const [connected, setConnected] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [activeUsers, setActiveUsers] = useState([]);
-  const [showActiveUsers, setShowActiveUsers] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [showActiveUsersInDashboard, setShowActiveUsersInDashboard] = useState(false);
 
   const ws = useRef(null);
   const messagesEndRef = useRef(null);
 
-  // --- Message color helpers ---
   const userColors = useRef({});
   const getRandomColor = (user) =>
     `hsl(${Math.floor(Math.abs(hashCode(user)) % 360)}, 70%, 85%)`;
@@ -37,7 +35,6 @@ function App() {
     return userColors.current[user];
   };
 
-  // --- WebSocket ---
   const joinRoom = (roomName = "general", usernameParam = username, fetchHistory = true) => {
     if (!usernameParam) return alert("Enter a username first");
 
@@ -49,7 +46,7 @@ function App() {
     setRoom(roomName);
     setMessages([]);
     setActiveUsers([]);
-    setShowActiveUsers(false);
+    setShowActiveUsersInDashboard(false);
 
     const socketUrl = `ws://127.0.0.1:8000/ws/${encodeURIComponent(usernameParam)}`;
     ws.current = new WebSocket(socketUrl);
@@ -76,11 +73,9 @@ function App() {
     ws.current.onerror = (err) => console.error("WebSocket error:", err);
   };
 
-  // --- New chat room ---
   const createNewRoom = () => {
     if (!username) return alert("Enter a username first");
     const roomName = "room_" + Math.random().toString(36).substr(2, 6);
-    // Add new=true param so the room starts empty
     const url = `${window.location.origin}?username=${encodeURIComponent(username)}&room=${encodeURIComponent(roomName)}&new=true`;
     window.open(url, "_blank");
   };
@@ -92,7 +87,6 @@ function App() {
     setInput("");
   };
 
-  // On mount, join room
   useEffect(() => {
     const isNewRoom = getQueryParam("new") === "true";
     if (username) joinRoom(room, username, !isNewRoom);
@@ -111,10 +105,7 @@ function App() {
 
   return (
     <div className="app-bg">
-      {/* Persistent tree outline */}
       <img src={AutumnOutline} alt="Autumn Outline" className="outline-img" />
-
-      {/* Animated bubbles */}
       <Bubbles count={50} />
 
       {!connected ? (
@@ -136,22 +127,38 @@ function App() {
         </div>
       ) : (
         <div className="chat-container">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+          {/* Header with dashboard toggle */}
+          <div className="chat-header">
             <h2 className="chat-title">Group Chat — {room}</h2>
-            <div>
-              <button className="dashboard-btn" onClick={() => setShowActiveUsers(v => !v)}>Active Users</button>
-              <button className="dashboard-btn" onClick={createNewRoom} style={{ marginLeft: 8 }}>New Chat Room</button>
+
+            <div className="dashboard">
+              <button
+                className="dashboard-toggle"
+                onClick={() => setShowDashboard(v => !v)}
+              >
+                ☰
+              </button>
+
+              {showDashboard && (
+                <div className="dashboard-menu">
+                  <div>
+                    <button
+                      onClick={() => setShowActiveUsersInDashboard(v => !v)}
+                    >
+                      👥 Active Users
+                    </button>
+                    {showActiveUsersInDashboard && (
+                      <ul style={{ paddingLeft: 15, marginTop: 5 }}>
+                        {activeUsers.length ? activeUsers.map(u => <li key={u}>{u}</li>) : <li>No active users</li>}
+                      </ul>
+                    )}
+                  </div>
+                  <button onClick={createNewRoom}>🆕 New Chat Room</button>
+                  <button onClick={() => alert("Wallpaper change coming soon!")}>🎨 Change Wallpaper</button>
+                </div>
+              )}
             </div>
           </div>
-
-          {showActiveUsers && (
-            <div className="active-users-list">
-              <strong>Active users:</strong>
-              <div style={{ marginTop: 8 }}>
-                {activeUsers.length ? activeUsers.map(u => <div key={u}>{u}</div>) : <div>No active users</div>}
-              </div>
-            </div>
-          )}
 
           <div className="messages-box">
             {messages.map((msg, idx) => {
