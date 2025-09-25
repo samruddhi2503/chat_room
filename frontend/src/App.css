@@ -4,9 +4,18 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #74ebd5, #acb6e5);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(270deg, #f0d9b3, #e9d2e9, #a1c4fd, #c2e9fb);
+  background-size: 1000% 1000%;
+  animation: gradientBG 15s ease infinite;
 }
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 .login-container {
   background: rgba(255, 255, 255, 0.95);
@@ -360,4 +369,30 @@ h1 {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+/* Floating bubbles */
+.bubble {
+  position: absolute;
+  left: -50px; /* start slightly off-screen */
+  background: rgba(245, 233, 228, 0.63); /* transparent white */
+  border-radius: 50%;
+  pointer-events: none; /* so it doesn't block clicks */
+  animation-name: floatRight;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Move bubbles left-to-right across the screen */
+@keyframes floatRight {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(110vw) scale(1.2);
+    opacity: 0;
+  }
 }
