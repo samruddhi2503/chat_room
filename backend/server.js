@@ -1,4 +1,4 @@
-// server.js
+
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 8000 });
 
@@ -51,7 +51,6 @@ wss.on("connection", (ws, req) => {
     let data;
     try { data = JSON.parse(raw); } catch (e) { return; }
 
-    // if it's a chat message
     if (data.content) {
       const messageData = {
         type: "message",
