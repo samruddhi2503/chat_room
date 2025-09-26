@@ -5,7 +5,8 @@ A full-stack **chat application** with frontend and backend functionality, built
 ---
 ### Watch demo video : https://drive.google.com/file/d/1gOy4VKTHc_vu9F_BQS9ZQAjJkAKtbeCx/view?usp=drivesdk
 ---
-
+Documentation : https://drive.google.com/file/d/1E0S8ve3aIf1ccQkpz7-ucc38YyvxSCS8/view?usp=drivesdk
+---
 ## Features
 
 - Real-time chat functionality
