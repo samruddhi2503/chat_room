@@ -3,6 +3,8 @@
 A full-stack **chat application** with frontend and backend functionality, built with React, Node.js, and FastAPI. Users can send and receive messages in real-time, with features like instant timestamps, chat wallpapers, multiple chat rooms, and message history.
 
 ---
+### Watch demo video : https://drive.google.com/file/d/1gOy4VKTHc_vu9F_BQS9ZQAjJkAKtbeCx/view?usp=drivesdk
+---
 
 ## Features
 
@@ -15,30 +17,6 @@ A full-stack **chat application** with frontend and backend functionality, built
 - Clean and interactive UI
 - Separate frontend and backend structure
 - Fully version-controlled with Git
-
----
-
-## Project Structure
-
-project-root/
-│
-├── backend/ 
-│ ├── server.js
-│ ├── package.json
-│ ├── main.py
-│ ├── requirements.txt
-│ └── ...
-│
-├── frontend/ # React frontend
-│ ├── src/
-│ │ ├── App.js
-│ │ ├── components/
-│ │ └── ...
-│ ├── package.json
-│ └── ...
-│
-├── .gitignore
-
 
 ---
 
